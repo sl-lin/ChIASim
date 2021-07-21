@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1609705527495.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "2363040627",
+    "id" : "370F0A57",
+    "lastKnownWriteTime" : 1610246994,
+    "last_content_update" : 1610246992616,
+    "path" : "U:/3Dinteraction/testRpack/ChIASim/R/ChIASim.R",
+    "project_path" : "R/ChIASim.R",
+    "properties" : {
+        "cursorPosition" : "24,0",
+        "scrollLine" : "15"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

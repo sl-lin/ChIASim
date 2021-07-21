@@ -1,0 +1,84 @@
+---
+title: "ChIASim"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ChIASim}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+```
+# Introduction
+As researches on analyzing ChIA-PET and Hi-ChIP data accumulated over the past
+decade, many corresponding statistical tools have been developed. While most of these
+methods claiming better performance than the rest, a fair simulation study is lacking. In
+particular, a bench marking simulated data for comparison is lacking.   
+$\textbf{ChIASim}$ is a realistic simulation algorithm that is designed to generate simulated ChIA-PET or Hi-ChIP data, by mimicking major steps of ChIA-PET experiment.  
+In this package, we provide the following function:  
+* $\textbf{chiaSim}$ :This function simulates a set of data of chromosomal 3D interactions mediated by a specific protein which meant to mimicing the output data of ChIA-PET or Hi-Chip.  
+  
+  
+# ChIASim
+$chiaSim(TFBSfile=c("ERa", POL2"), TSSfile=NULL, mean.frag.length = 250, n.cells = 1E3,$
+$lp = 0.8, seqlength = 50, totalnumSites = 100, mc.cores.user = 1, beta = 1, gmclass = 1,$ $outputformat= c("base","BEDPE"))$
+
+$\textbf{TFBSfile}$ is a dataframe contain TFBS information for a specific protein of interest. It should contain at least three columns with first three columns tell the chromosome, start site and end site of each TFBS for this protein (see example below). Package have two TFBS data sets available, "ERa" or "POL2". Otherwise, users need to provide TFBS file with required information.  
+
+Here is an example for TFBS file:  
+```{r}
+library(ChIASim)
+data("POL2")
+head(POL2)
+```
+In this example, first three columns provided the required information, i.e., chromosome, start site and end site of each TFBS.  
+
+$\textbf{TSSfile}$ is a dataframe contain TSS information. Users do not have to provide TSS file as the package have the TSS information of hg19 that obtained from Refseq. However if users do provide a TSS file, it should follow the format as show in the example.  
+
+Here is an example for TSS file:  
+```{r}
+data("TSS")
+head(TSS)
+```
+In this example, the first column is the gene ID for each TSS. Second column is the chromosome. Third column is strand direction defined as + (forward) or - (reverse). Forth column and fifth column are the TSS for forward and reverse strand. So if a read is from a forward strand, then the TSS is the number of forth column. Otherwise, the TSS is the number of fifth column. The sixth column is the name of gene.
+
+$\textbf{mean.frag.length}$ is the mean chromosome fragment length for sonication simulation. To simulate the sonication step in the real ChIA-PET experiment that cut choromosomes into pieces, the mean chromosome fragment length need to be set to determine the average length of fragments. It is set to 250bp by defaut.  
+
+$\textbf{n.cells}$ is the simulated number of cells which can be seen as the size of sampling pool for interactions or sequencing depth. ChIA-PET usually sequcence $1*10^5$ cells and Hi-ChIP usually sequence $1*10^6$ cells.  
+
+$\textbf{lp}$ is the ligation probability which is the probability of two paired fragment to ligate and form an interaction.  
+
+$\textbf{seqlength}$ is the length of seqencing read. ChIP-PET can only seqence two segments on the ends of an interacting pair. Usually the length of such seqencing is about 50bp, hence it is set to be the default seqencing length.  
+
+$\textbf{totalnumSites}$ is the total number of TFBS and TSS sites selected, respectively, for interacton. Seleted TFBS and TSS are allocated to each choromosome according to their legnths. Sites for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the true pairs are randomly selected across the whole genome.  
+  
+  
+$\textbf{mc.cores.user}$ is the number of cores used to do parallel computing.  
+
+$\textbf{beta}$ is the power parameter. Power parameter is the power based on the widely believed power law between interaction frequency and 1/log(genomic distance). Usually set to 1/2 for human, i.e., interaction frequency = (1/log(genomic distance))^(1/2).
+
+$\textbf{gmclass}$ is the variable of whether to identify self-ligation pairs. When it is set to 2, the pairs will be clusted into 2 clusters according to genomic distance and remove the cluster with smaller genomic distance (self-ligation).  
+
+$\textbf{outputformat}$ is the format of output simulated data. Users can choose either "base" or "BEDPE". Below shows the examples of output with base format and BEDPE format.  
+
+```{r, message=FALSE}
+#base format
+output<- chiaSim(TFBSfile = "POL2",beta = 1/2)
+head(output)
+```
+First seven columns are the location information for two anchors of an interacting pair. mc  column is the margincal counts. LT column tells the category of each pair, TL (true high), TL  (true low) and F (false). mini.distance tells the Mdist of each pair.  
+
+```{r, message=FALSE}
+#BEDPE format
+output<- chiaSim(TFBSfile = "POL2",beta = 1/2, outputformat="BEDPE")
+head(output)
+```
+First six columns show the data format of BEDPE. Last three columns are the same as mentioned above. 
+

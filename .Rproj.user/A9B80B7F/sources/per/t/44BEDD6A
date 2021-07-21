@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1610246441710.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "1993416638",
+    "id" : "44BEDD6A",
+    "lastKnownWriteTime" : 1609884894,
+    "last_content_update" : 1609884894,
+    "path" : "U:/3Dinteraction/testRpack/ChIASim/man/ChIASim-package.Rd",
+    "project_path" : "man/ChIASim-package.Rd",
+    "properties" : {
+        "cursorPosition" : "21,38",
+        "scrollLine" : "10"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_doc"
+}
