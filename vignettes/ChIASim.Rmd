@@ -81,11 +81,11 @@ $\textbf{lp}$ is the ligation probability. The probability of two segments to li
 
 $\textbf{seqlength}$ is the length of the fragments to be seqenced. ChIP-PET seqences the two end segments of an interacting pair.  The ideal length of PET seqencing is 50-100bp (Fullwood et al, 2009), hence it is set to be 50bp for the default seqencing length.  
 
-$\textbf{N_E}$ is the numbers of TFBS sites selected for simulation. The seleted TFBS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. 
+$\textbf{N.E}$ is the numbers of TFBS sites selected for simulation. The seleted TFBS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. 
   
-$\textbf{N_P}$ is the numbers of TSS sites selected for simulation. The seleted TSS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. 
+$\textbf{N.P}$ is the numbers of TSS sites selected for simulation. The seleted TSS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. 
 
-$\textbf{REp}$ is the pattern of restricted enzyme. It is set to AAGCTT by default, which is the patter of HindIII. 
+$\textbf{REp}$ is the pattern of restriction enzyme. It is set to AAGCTT by default, which is the patter of HindIII. 
   
 $\textbf{mc.cores.user}$ is the number of cores used to do parallel computing when multi cores are available at the user's end.  
 
