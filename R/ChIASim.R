@@ -38,7 +38,7 @@
 
 #Randomly select sites from a set of TFBS and a set of TSS
 chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cells = 1E3, lp = 0.8,
-                    seqlength = 50, N_E = 100, N_P = 100, REp = "AAGCTT", mc.cores.user = 1,
+                    seqlength = 50, N.E = 100, N.P = 100, REp = "AAGCTT", mc.cores.user = 1,
                     beta = 1, gmclass = 1, outputformat= "base", seed=2021){
 
   if (!requireNamespace("parallel", quietly = TRUE)) install.packages("parallel")
@@ -136,8 +136,8 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
   ###### select interested interaction sites
 
   print("Allocate interaction sites")
-  numSites.TFBS <- round(N_E*allocateNumPairs.TFBS)# 3 - 17
-  numSites.TSS <- round(N_P*allocateNumPairs.TSS) # 3 - 20
+  numSites.TFBS <- round(N.E*allocateNumPairs.TFBS)# 3 - 17
+  numSites.TSS <- round(N.P*allocateNumPairs.TSS) # 3 - 20
 
 
   TFBS.selected<-mat.or.vec(23,2*max(numSites.TFBS)); TFBS.selected.id<-mat.or.vec(23, 2*max(numSites.TFBS)) #23*34
