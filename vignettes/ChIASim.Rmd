@@ -81,6 +81,7 @@ $\textbf{lp}$ is the ligation probability. The probability of two segments to li
 
 $\textbf{seqlength}$ is the length of the fragments to be seqenced. ChIP-PET seqences the two end segments of an interacting pair.  The ideal length of PET seqencing is 50-100bp (Fullwood et al, 2009), hence it is set to be 50bp for the default seqencing length.  
 
+<<<<<<< HEAD
 $\textbf{N.E}$ is the numbers of TFBS sites randomly selected ($N_E$) from the provided TFBS file for forming true pairs for simulation. The selected TFBS sites are allocated to each choromosome proportional to their lengths. It is set to 400 by default.
   
 $\textbf{N.P}$ is the numbers of TSS sites randomly selected ($N_P$) from the provided TSS file for forming true pairs for simulation. The selected TSS sites are allocated to each choromosome proportional to its lengths. It is set to 400 by default. 
@@ -90,6 +91,13 @@ $\textbf{N.nE}$ is the numbers of TFBS sites randomly selected ($N_{\overline{E}
 $\textbf{N.nP}$ is the numbers of TSS sites randomly selected ($N_{\overline{P}}$) across the whole genome for forming the false pairs for simulation. The selected TSS sites are allocated to each choromosome proportional to their lengths.  It is set to 400 by default. 
 
 $\textbf{REp}$ is the pattern of restricted enzyme. It is set to AAGCTT by default, which is the pattern of HindIII. 
+=======
+$\textbf{N.E}$ is the numbers of TFBS sites selected for simulation. The seleted TFBS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. 
+  
+$\textbf{N.P}$ is the numbers of TSS sites selected for simulation. The seleted TSS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. 
+
+$\textbf{REp}$ is the pattern of restriction enzyme. It is set to AAGCTT by default, which is the patter of HindIII. 
+>>>>>>> cae7d715e79b7e5ec5fa6cb14f9865ddc43f3b44
   
 $\textbf{mc.cores.user}$ is the number of cores used to do parallel computing when multi cores are available at the user's end.  
 
