@@ -38,11 +38,7 @@
 
 #Randomly select sites from a set of TFBS and a set of TSS
 chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cells = 1E3, lp = 0.8,
-<<<<<<< HEAD
                     seqlength = 50, N.E = 100, N.P = 100, N.nE = 100, N.nP = 100, REp = "AAGCTT", mc.cores.user = 1,
-=======
-                    seqlength = 50, N.E = 100, N.P = 100, REp = "AAGCTT", mc.cores.user = 1,
->>>>>>> cae7d715e79b7e5ec5fa6cb14f9865ddc43f3b44
                     beta = 1, gmclass = 1, outputformat= "base", seed=2021){
 
   if (!requireNamespace("parallel", quietly = TRUE)) install.packages("parallel")
@@ -142,7 +138,6 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
   print("Allocate interaction sites")
   numSites.TFBS <- round(N.E*allocateNumPairs.TFBS)# 3 - 17
   numSites.TSS <- round(N.P*allocateNumPairs.TSS) # 3 - 20
-<<<<<<< HEAD
   numSites.nTFBS <- round(N.nE*allocateNumPairs.TFBS)# 3 - 17
   numSites.nTSS <- round(N.nP*allocateNumPairs.TSS) # 3 - 20
 
@@ -153,8 +148,6 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
 
    TFBS.selected<-mat.or.vec(23,max(numSites.TFBS)+max(numSites.nTFBS)); TFBS.selected.id<-mat.or.vec(23, max(numSites.TFBS)+max(numSites.nTFBS)) #23*34
    TSS.selected<-mat.or.vec(23,max(numSites.TSS)+max(numSites.nTSS)); TSS.selected.id<-mat.or.vec(23,max(numSites.TSS)+max(numSites.nTSS)) #23*40
-=======
->>>>>>> cae7d715e79b7e5ec5fa6cb14f9865ddc43f3b44
 
 
 
