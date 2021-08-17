@@ -28,7 +28,7 @@ convertfmt<-function(input, inputformat=c("base","BEDPE")){
     temp$endB <- as.numeric(as.character(temp$endB))
     temp$count <- as.numeric(as.character(temp$count))
     
-    temp <- cbind(temp, input[,7:9])
+    temp <- cbind(temp, input[,7:10])
     input <- temp
   }
   
