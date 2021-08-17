@@ -4,10 +4,10 @@
 \title{chiaSim
 }
 \description{
-This function simulates a set of data of chromosomal 3D interactions mediated by a specific protein which meant to mimicing the output data of ChIA-PET or Hi-Chip.  }
+This function simulates a set of data of chromosomal 3D interactions mediated by a specific protein which meant to mimicing the output data of ChIA-PET or Hi-ChIP.  }
 \usage{
 chiaSim(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, 
-	n.cells = 1E3, lp = 0.8, seqlength = 50, N_E=100, N_P=100, 
+	n.cells = 1E3, lp = 0.8, seqlength = 50, N.E=100, N.P=100, N.nE=100, N.nP=100,
 	REp = "AAGCTT", mc.cores.user = 1, beta = 1, gmclass = 1, 
 	outputformat= "base", seed = NULL)
 }
@@ -25,11 +25,15 @@ n.cells is the simulated number of cells which may be interpreted as the  sequen
 The ligation probability. The probability of two segments to ligate. It is set to 0.8 by default. }
   \item{seqlength}{
 seqlength is the length of the fragments to be seqenced. ChIP-PET seqences the two end segments of an interacting pair.  The ideal length of PET seqencing is 50-100bp (Fullwood et al, 2009), hence it is set to be 50bp for the default seqencing length.  }
- \item{N_E=400}{ 
-is the numbers of TFBS sites selected for simulation. The seleted TFBS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. }
+ 
+\item{N.E}{ is the numbers of TFBS sites randomly selected ($N_E$) from the provided TFBS file for forming true pairs for simulation. The selected TFBS sites are allocated to each choromosome proportional to their lengths. It is set to 400 by default.}
   
- \item{N_P=400}{ 
-is the numbers of TSS sites selected for simulation. The seleted TSS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default.}
+\item{N.P}{ is the numbers of TSS sites randomly selected ($N_P$) from the provided TSS file for forming true pairs for simulation. The selected TSS sites are allocated to each choromosome proportional to its lengths. It is set to 400 by default.} 
+
+\item{N.nE}{ is the numbers of TFBS sites randomly selected ($N_{\overline{E}}$) across the whole genome for forming the false pairs for simulation. The selected TFBS sites are allocated to each choromosome proportional to their lengths. It is set to 400 by default.}
+  
+\item{N.nP}{ is the numbers of TSS sites randomly selected ($N_{\overline{P}}$) across the whole genome for forming the false pairs for simulation. The selected TSS sites are allocated to each choromosome proportional to their lengths.  It is set to 400 by default.} 
+
 
  \item{REp}{
 Restriction Enzyme Sequence pattern. Default is set as "AAGCTT", the pattern of hindIII.}
@@ -78,7 +82,7 @@ Fullwood MJ, Wei CL, Liu ET, Ruan Y. Next-generation DNA sequencing of paired-en
 \examples{
 data("POL2")
 data("TSS")
-output.base<- chiaSim(n.cells = 1E3, N_E=100, N_P=100, mc.cores.user = 48)
+output.base<- chiaSim(n.cells = 1E3, N.E=100, N.P=100, N.nE=100, N.nP=100, mc.cores.user = 48)
 head(output.base)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
