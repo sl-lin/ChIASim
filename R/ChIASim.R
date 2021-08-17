@@ -38,7 +38,7 @@
 
 #Randomly select sites from a set of TFBS and a set of TSS
 chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cells = 1E3, lp = 0.8,
-                    seqlength = 50, N_E = 100, N_P = 100, REp = "AAGCTT", mc.cores.user = 1,
+                    seqlength = 50, N.E = 100, N.P = 100, N.nE = 100, N.nP = 100, REp = "AAGCTT", mc.cores.user = 1,
                     beta = 1, gmclass = 1, outputformat= "base", seed=2021){
 
   if (!requireNamespace("parallel", quietly = TRUE)) install.packages("parallel")
@@ -136,12 +136,20 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
   ###### select interested interaction sites
 
   print("Allocate interaction sites")
-  numSites.TFBS <- round(N_E*allocateNumPairs.TFBS)# 3 - 17
-  numSites.TSS <- round(N_P*allocateNumPairs.TSS) # 3 - 20
+  numSites.TFBS <- round(N.E*allocateNumPairs.TFBS)# 3 - 17
+  numSites.TSS <- round(N.P*allocateNumPairs.TSS) # 3 - 20
+  numSites.nTFBS <- round(N.nE*allocateNumPairs.TFBS)# 3 - 17
+  numSites.nTSS <- round(N.nP*allocateNumPairs.TSS) # 3 - 20
 
 
-  TFBS.selected<-mat.or.vec(23,2*max(numSites.TFBS)); TFBS.selected.id<-mat.or.vec(23, 2*max(numSites.TFBS)) #23*34
-  TSS.selected<-mat.or.vec(23,2*max(numSites.TSS)); TSS.selected.id<-mat.or.vec(23,2*max(numSites.TSS)) #23*40
+
+  #TFBS.selected<-mat.or.vec(23,2*max(numSites.TFBS)); TFBS.selected.id<-mat.or.vec(23, 2*max(numSites.TFBS)) #23*34
+  #TSS.selected<-mat.or.vec(23,2*max(numSites.TSS)); TSS.selected.id<-mat.or.vec(23,2*max(numSites.TSS)) #23*40
+
+   TFBS.selected<-mat.or.vec(23,max(numSites.TFBS)+max(numSites.nTFBS)); TFBS.selected.id<-mat.or.vec(23, max(numSites.TFBS)+max(numSites.nTFBS)) #23*34
+   TSS.selected<-mat.or.vec(23,max(numSites.TSS)+max(numSites.nTSS)); TSS.selected.id<-mat.or.vec(23,max(numSites.TSS)+max(numSites.nTSS)) #23*40
+
+
 
   set.seed(seed=seed)
   for (i in 1:23){
@@ -184,8 +192,8 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
     temp.F <- sample.int(nrow(temp.seg),numSites.TFBS[i])
 
     temp.TFBS.F <- sapply(temp.F, function(rF){sample.int(temp.seg[rF,1]:temp.seg[rF,2],1)})
-    TFBS.selected[i,(numSites.TFBS[i]+1):(numSites.TFBS[i]+numSites.TFBS[i])]<- temp.TFBS.F
-    TFBS.selected.id[i,(numSites.TFBS[i]+1):(numSites.TFBS[i]+numSites.TFBS[i])]<-rep("No_gene",numSites.TFBS[i])
+    TFBS.selected[i,(numSites.TFBS[i]+1):(numSites.TFBS[i]+numSites.nTFBS[i])]<- temp.TFBS.F
+    TFBS.selected.id[i,(numSites.TFBS[i]+1):(numSites.TFBS[i]+numSites.nTFBS[i])]<-rep("No_gene",numSites.nTFBS[i])
 
     temp<-sample(which(TSS$chr==paste("chr",chr.idx,sep="")),numSites.TSS[i]) #randomly select m_i TFBS from a chrom
     extend.temp <- as.matrix(TSS$TSS[temp])
@@ -199,8 +207,8 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
 
     temp.TSS.F <- sapply(temp.F, function(rF){sample.int(temp.seg[rF,1]:temp.seg[rF,2],1)})
 
-    TSS.selected[i,(numSites.TSS[i]+1):(numSites.TSS[i]+numSites.TSS[i])]<-temp.TSS.F
-    TSS.selected.id[i,(numSites.TSS[i]+1):(numSites.TSS[i]+numSites.TSS[i])]<-rep("No_gene",numSites.TSS[i])
+    TSS.selected[i,(numSites.TSS[i]+1):(numSites.TSS[i]+numSites.nTSS[i])]<-temp.TSS.F
+    TSS.selected.id[i,(numSites.TSS[i]+1):(numSites.TSS[i]+numSites.nTSS[i])]<-rep("No_gene",numSites.nTSS[i])
   }
 
   print("Make pairings")
@@ -234,7 +242,7 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
   temp.2 <- list()
   for(i in 1:23){
     for(j in 1:23){
-      temp.2[[z]] <- expand.grid(i,j,(numSites.TFBS[i]+1):(numSites.TFBS[i]+numSites.TFBS[i]),(numSites.TSS[j]+1):(numSites.TSS[j]+numSites.TSS[j])) #Non-specific TFBS and TSS
+      temp.2[[z]] <- expand.grid(i,j,(numSites.TFBS[i]+1):(numSites.TFBS[i]+numSites.nTFBS[i]),(numSites.TSS[j]+1):(numSites.TSS[j]+numSites.nTSS[j])) #Non-specific TFBS and TSS
       z=z+1
     }
   }
