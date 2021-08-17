@@ -7,7 +7,11 @@
 This function simulates a set of data of chromosomal 3D interactions mediated by a specific protein which meant to mimicing the output data of ChIA-PET or Hi-ChIP.  }
 \usage{
 chiaSim(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, 
+<<<<<<< HEAD
 	n.cells = 1E3, lp = 0.8, seqlength = 50, N.E=100, N.P=100, N.nE=100, N.nP=100,
+=======
+	n.cells = 1E3, lp = 0.8, seqlength = 50, N.E=100, N.P=100, 
+>>>>>>> cae7d715e79b7e5ec5fa6cb14f9865ddc43f3b44
 	REp = "AAGCTT", mc.cores.user = 1, beta = 1, gmclass = 1, 
 	outputformat= "base", seed = NULL)
 }
@@ -25,6 +29,7 @@ n.cells is the simulated number of cells which may be interpreted as the  sequen
 The ligation probability. The probability of two segments to ligate. It is set to 0.8 by default. }
   \item{seqlength}{
 seqlength is the length of the fragments to be seqenced. ChIP-PET seqences the two end segments of an interacting pair.  The ideal length of PET seqencing is 50-100bp (Fullwood et al, 2009), hence it is set to be 50bp for the default seqencing length.  }
+<<<<<<< HEAD
  
 \item{N.E}{ is the numbers of TFBS sites randomly selected ($N_E$) from the provided TFBS file for forming true pairs for simulation. The selected TFBS sites are allocated to each choromosome proportional to their lengths. It is set to 400 by default.}
   
@@ -34,6 +39,13 @@ seqlength is the length of the fragments to be seqenced. ChIP-PET seqences the t
   
 \item{N.nP}{ is the numbers of TSS sites randomly selected ($N_{\overline{P}}$) across the whole genome for forming the false pairs for simulation. The selected TSS sites are allocated to each choromosome proportional to their lengths.  It is set to 400 by default.} 
 
+=======
+ \item{N.E}{ 
+is the numbers of TFBS sites selected for simulation. The seleted TFBS sites are allocated to each choromosome proportional to its length. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. }
+  
+ \item{N.P}{ 
+is the numbers of TSS sites selected for simulation. The seleted TSS sites are allocated to each choromosome proportional to its length. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default.}
+>>>>>>> cae7d715e79b7e5ec5fa6cb14f9865ddc43f3b44
 
  \item{REp}{
 Restriction Enzyme Sequence pattern. Default is set as "AAGCTT", the pattern of hindIII.}
