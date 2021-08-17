@@ -1,7 +1,7 @@
 Package: ChIASim
 Type: Package
 Title: ChIASim
-Version: 1.0
+Version: 1.1
 Author: Shuyuan Lou (The Ohio State University, USA), Shili Lin (The Ohio State University, USA)
 Maintainer: Shuyuan Lou <lou.59@osu.edu>
 Description: ChIASim is a realistic simulation algorithm that is designed to generate simulated ChIA-PET or Hi-ChIP data, by mimicking major steps of ChIA-PET experiment. 
