@@ -52,7 +52,7 @@ This package contains the following two functions:
 
 
 
-$chiaSim(TFBSfile="POL2", TSSfile=NULL, mean.frag.length = 250, n.cells = 1E5,lp = 0.8, seqlength = 50, N_E=400, N_P=400, REp = "AAGCTT", mc.cores.user = 24, beta = 1, gmclass = 1, outputformat= "base", seed=NULL)$
+$chiaSim(TFBSfile="POL2", TSSfile=NULL, mean.frag.length = 250, n.cells = 1E5,lp = 0.8, seqlength = 50, N.E=400, N.P=400, N.nE=400, N.nP=400, REp = "AAGCTT", mc.cores.user = 24, beta = 1, gmclass = 1, outputformat= "base", seed=NULL)$
 
 ## Input data format for chiaSim
 
@@ -81,11 +81,15 @@ $\textbf{lp}$ is the ligation probability. The probability of two segments to li
 
 $\textbf{seqlength}$ is the length of the fragments to be seqenced. ChIP-PET seqences the two end segments of an interacting pair.  The ideal length of PET seqencing is 50-100bp (Fullwood et al, 2009), hence it is set to be 50bp for the default seqencing length.  
 
-$\textbf{N_E}$ is the numbers of TFBS sites selected for simulation. The seleted TFBS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. 
+$\textbf{N.E}$ is the numbers of TFBS sites randomly selected ($N_E$) from the provided TFBS file for forming true pairs for simulation. The selected TFBS sites are allocated to each choromosome proportional to their lengths. It is set to 400 by default.
   
-$\textbf{N_P}$ is the numbers of TSS sites selected for simulation. The seleted TSS sites are allocated to each choromosome proportional to its legnths. Site for forming the true pairs are randomly selected from the provided TFBS and TSS file for true pairs, while sites for forming the false pairs are randomly selected across the whole genome. It is set to 400 by default. 
+$\textbf{N.P}$ is the numbers of TSS sites randomly selected ($N_P$) from the provided TSS file for forming true pairs for simulation. The selected TSS sites are allocated to each choromosome proportional to its lengths. It is set to 400 by default. 
 
-$\textbf{REp}$ is the pattern of restricted enzyme. It is set to AAGCTT by default, which is the patter of HindIII. 
+$\textbf{N.nE}$ is the numbers of TFBS sites randomly selected ($N_{\overline{E}}$) across the whole genome for forming the false pairs for simulation. The selected TFBS sites are allocated to each choromosome proportional to their lengths. It is set to 400 by default.
+  
+$\textbf{N.nP}$ is the numbers of TSS sites randomly selected ($N_{\overline{P}}$) across the whole genome for forming the false pairs for simulation. The selected TSS sites are allocated to each choromosome proportional to their lengths.  It is set to 400 by default. 
+
+$\textbf{REp}$ is the pattern of restricted enzyme. It is set to AAGCTT by default, which is the pattern of HindIII. 
   
 $\textbf{mc.cores.user}$ is the number of cores used to do parallel computing when multi cores are available at the user's end.  
 
@@ -100,14 +104,14 @@ $\textbf{seed}$ The seed number. It may be set for reproducibility purpose. Othe
 ```{r, message=FALSE}
 #The parameters are set to be smaller than default for a quick illustration.
 #base format
-output.base<- chiaSim(n.cells = 1E3, N_E=100, N_P=100, mc.cores.user = 48)
+output.base<- chiaSim(n.cells = 1E3, N.E=100, N.P=100, N.nE=100, N.nP=100,  mc.cores.user = 48)
 head(output.base)
 ```
 The first seven columns are the 7-column base format, which provide the location information for two anchors of an interacting pair plus the interaction count. LT column is the ligation type, which tells the category of each pair, TL (true high), TL  (true low) and F (false). MC column is the margincal counts which is the sum of counts of two anchors of a pair interacting with with all anchors in the data set. Mdist tells the minimum distance of each pair to their closes pair of TFBS and TSS. Gdist is the genomic distance between the midpoints of two interacting anchors.
 
 ```{r, message=FALSE}
 #BEDPE format
-output.BEDPE<- chiaSim(n.cells = 1E3, N_E=100, N_P=100, mc.cores.user = 48, outputformat="BEDPE")
+output.BEDPE<- chiaSim(n.cells = 1E3, N.E=100, N.P=100, N.nE=100, N.nP=100, mc.cores.user = 48, outputformat="BEDPE")
 head(output.BEDPE[[1]])
 head(output.BEDPE[[2]])
 ```
