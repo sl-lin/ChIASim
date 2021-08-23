@@ -47,7 +47,20 @@ This package contains the following two functions:
 
  - $\textbf{chiaSim}$: This function simulates a set of chromosomal interactions mediated by a specific protein, which can be regarded as the in silico counterparts of ChIA-PET or Hi-ChIP.
  - $\textbf{convertfmt}$: This function that allows user to siwtch the output data format between "base" and "BEDPE" without re-running the whole simulation program. The details on the formats are described below.
+ 
+# Installation
+ChIASim can be downloaded from GitHub: https://github.com/sy-lou/ChIASim as a zip file
+Then install using the zip file by install.packages("~/ChIASim-main.zip", repos = NULL, type = "win.binary") on Windows
+Or unzip it and then install using the unzipped file by devtools::install_local("~/ChIASim-main") on any platform
+
+ChIASim depends on other packages, i.e., parallel, BSgenome.Hsapiens.UCSC.hg19, and GenomicFeatures. They need to be installed, one may use the commands below, in advance to run ChIASim.  
+
+  if (!requireNamespace("parallel", quietly = TRUE)) install.packages("parallel")
+  if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+  if (!requireNamespace("BSgenome.Hsapiens.UCSC.hg19", quietly = TRUE)) BiocManager::install("BSgenome.Hsapiens.UCSC.hg19")
+  if (!requireNamespace("GenomicFeatures", quietly = TRUE)) BiocManager::install("GenomicFeatures")
   
+ 
 # ChIASim for data generation
 
 
@@ -104,14 +117,14 @@ $\textbf{seed}$ The seed number. It may be set for reproducibility purpose. Othe
 ```{r, message=FALSE}
 #The parameters are set to be smaller than default for a quick illustration.
 #base format
-output.base<- chiaSim(n.cells = 1E3, N.E=100, N.P=100, N.nE=100, N.nP=100,  mc.cores.user = 48)
+output.base<- chiaSim(n.cells = 500, N.E=100, N.P=100, N.nE=100, N.nP=100,  mc.cores.user = 1)
 head(output.base)
 ```
 The first seven columns are the 7-column base format, which provide the location information for two anchors of an interacting pair plus the interaction count. LT column is the ligation type, which tells the category of each pair, TL (true high), TL  (true low) and F (false). MC column is the margincal counts which is the sum of counts of two anchors of a pair interacting with with all anchors in the data set. Mdist tells the minimum distance of each pair to their closes pair of TFBS and TSS. Gdist is the genomic distance between the midpoints of two interacting anchors.
 
 ```{r, message=FALSE}
 #BEDPE format
-output.BEDPE<- chiaSim(n.cells = 1E3, N.E=100, N.P=100, N.nE=100, N.nP=100, mc.cores.user = 48, outputformat="BEDPE")
+output.BEDPE<- chiaSim(n.cells = 500, N.E=100, N.P=100, N.nE=100, N.nP=100, mc.cores.user = 1, outputformat="BEDPE")
 head(output.BEDPE[[1]])
 head(output.BEDPE[[2]])
 ```
