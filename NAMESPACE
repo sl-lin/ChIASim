@@ -1,2 +1,2 @@
-import(parallel)
+import(parallel,BSgenome.Hsapiens.UCSC.hg19,GenomicFeatures)
 export(chiaSim,convertfmt)
