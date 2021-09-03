@@ -73,8 +73,10 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
 
   print("Reading TFBS and TSS")
   ###### get chromosome lengths
-  #chr.length<-sapply(1:23,function(i){length(Hsapiens[[i]])})
-  chr.length <- getChromInfoFromUCSC("hg19")$size[1:23]
+  chr.length<-sapply(1:23,function(i){length(Hsapiens[[i]])})
+  #chr.length <- getChromInfoFromUCSC("hg19")$size[1:23]
+  #chr.length <- getChromInfoFromUCSC("hg19")$length[1:23]
+
   ###### get TFBS information
   TFBS<-TFBS[TFBS$chrom!="chrY",]
   TFBS$midpoint<-(TFBS$chromStart+TFBS$chromEnd)/2
