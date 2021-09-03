@@ -49,9 +49,7 @@ This package contains the following two functions:
  - $\textbf{convertfmt}$: This function that allows user to siwtch the output data format between "base" and "BEDPE" without re-running the whole simulation program. The details on the formats are described below.
  
 # Installation
-ChIASim can be downloaded from GitHub: https://github.com/sy-lou/ChIASim as a zip file
-Then install using the zip file by install.packages("~/ChIASim-main.zip", repos = NULL, type = "win.binary") on Windows
-Or unzip it and then install using the unzipped file by devtools::install_local("~/ChIASim-main") on any platform
+ChIASim can be installed from GitHub by devtools::install_git("https://github.com/sy-lou/ChIASim")
 
 ChIASim depends on other packages, i.e., parallel, BSgenome.Hsapiens.UCSC.hg19, and GenomicFeatures. They need to be installed, one may use the commands below, in advance to run ChIASim.  
 
