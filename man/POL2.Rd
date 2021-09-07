@@ -4,7 +4,7 @@
 \title{POL2
 }
 \description{
-A TFBS file containing POL2 location information.
+A TFBS file containing POL2 binding sites information (ENCODE, 2012).
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
@@ -26,7 +26,7 @@ data(POL2)
 %% ...
 }
 \references{
-ENCODE Project Consortium.. An integrated encyclopedia of DNA elements in the human genome. Nature 2012 Sep 6;489(7414):57-74. 
+ENCODE Project Consortium. An integrated encyclopedia of DNA elements in the human genome. Nature 2012 Sep 6;489(7414):57-74. 
 %% ~put references to the literature/web site here ~
 }
 \author{

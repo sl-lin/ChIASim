@@ -9,20 +9,16 @@
 \packageDescription{ChIASim}
 }
 \details{
-Chromosomal 3D interactions have been long studied to investigate the genome structure
-and function. The understanding of 3D structure of genome is much deepened by the
-advances of biological technologies that are designed to depict that. ChIP-PET and Hi-ChIP are two
-methods that provide the chromatin interactions that are associated with a specific protein.
-As researches on analyzing ChIA-PET and Hi-ChIP data accumulated over the past
-decade, many corresponding statistical tools have been developed. While most of these
-methods claiming better performance than the rest, a fair simulation study is lacking. In
-particular, a bench marking simulated data for comparison is lacking. This package is designed to fill such blank that generates 
-such simulated data.
+Chromosomal 3D interactions have been long studied to investigate the genome structure and functions. The understanding of the 3D structure of the genome is much deepened by the advances of biological technologies. ChIP-PET, PLAC-seq and Hi-ChIP are three methods that provide chromatin interactions that are associated with a specific protein. Over the past decade, many statistical tools have been developed to analyze ChIP-PET, PLAC-seq and Hi-ChIP data. While most of these methods claim better performance than the others, fair simulation studies is lacking, primarily due to the lacking of bench marking simulated data sets for fair comparisons. This package is designed to fill this gap.
 
-In this package, we provide the following function:  
+In this package, we provide the following two functions:  
 
- - chiaSim: This function simulates a set of data of chromosomal 3D interactions mediated by a specific protein which meant to mimicing the output data of ChIA-PET or Hi-Chip.  
- - convertfmt: This function that allows user to siwtch the output data format between "base" and "BEDPE" without re-running the whole simulation program.
+ - chiaSim: This function simulates a set of chromatin interactions mediated by a specific protein, which may be views are the in silico counterparts of the output data from ChIA-PET, PLAC-seq or Hi-ChIP. 
+ 
+ - convertfmt: This function allows user to siwtch the output data format between "base" and "BEDPE" without re-running the whole simulation program.
+ 
+ 
+Part of the code is this package is adopted from the open source package MDM (Niu and Lin, 2015).  
   
 }
 \author{
@@ -31,11 +27,5 @@ In this package, we provide the following function:
 Maintainer: \packageMaintainer{ChIASim}
 }
 \references{
-Mumbach, M., Rubin, A., Flynn, R. et al. HiChIP: efficient and sensitive analysis of protein-directed genome architecture. Nat Methods 13, 919-922 (2016). 
-
-Fudenberg, Geoffrey, and Leonid A Mirny. "Higher-order chromatin structure: bridging physics and biology." Current opinion in genetics & development vol. 22,2 (2012).
-
-}
-\note{
-We thank Niu Liang for his work in R package MDM. Our work is inspaired by his work and also adopted part of his code. 
+Niu, L and Lin, S. A Bayesian mixture model for chromatin interaction data. Statistical Applications in Genetics and Molecular Biology, vol. 14, no. 1, (2015), pp. 53-64. https://doi.org/10.1515/sagmb-2014-0029
 }

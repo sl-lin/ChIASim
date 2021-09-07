@@ -4,7 +4,7 @@
 \title{ERa
 }
 \description{
-A TFBS file containing ERa location information.  
+A TFBS file containing ERa binding sites information (Yang et al, 2013).  
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{

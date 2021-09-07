@@ -14,7 +14,7 @@ convertfmt(input, inputformat=c("base","BEDPE"))
   \item{input}{ The dataset which needs to be converted to a different format.%%     ~~Describe \code{dt} here~~
 }
 
- \item{inputformat}{The format of the data set to be converted. It can be either "base" or "BEDPE". If it is "base", it will be conveted to BEDPE, vice versa.%%     ~~Describe \code{dt} here~~
+ \item{inputformat}{The format of the data to be converted. It can be either "base" or "BEDPE". If it is "base", it will be conveted to BEDPE, and vice versa.%%     ~~Describe \code{dt} here~~
 }
 
 }
@@ -22,7 +22,7 @@ convertfmt(input, inputformat=c("base","BEDPE"))
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-A format converted simulated data set.
+A simulated data set after converted to either "base" or "BEDPE" format.
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
