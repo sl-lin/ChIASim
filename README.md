@@ -5,6 +5,7 @@ ChIA-Sim (Lou and Lin, 2021) is an in silico experimental protocol built on a re
 ChIASim can be installed from GitHub using following commands:
 ```
 install.packages("devtools")
+devtools::install_git("https://github.com/sl-lin/ChIASim")
 devtools::install_git("https://github.com/sy-lou/ChIASim")
 ```
 ChIASim depends on other packages, i.e., parallel, BSgenome.Hsapiens.UCSC.hg19, and GenomicFeatures. They need to be installed, one may use the commands below, in advance to run ChIASim.  
