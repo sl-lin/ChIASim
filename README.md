@@ -6,7 +6,10 @@ ChIASim can be installed from GitHub using following commands:
 ```
 install.packages("devtools")
 devtools::install_git("https://github.com/sl-lin/ChIASim")
-devtools::install_git("https://github.com/sy-lou/ChIASim")
+```
+or
+```
+devtools::install_github("https://github.com/sl-lin/ChIASim")
 ```
 ChIASim depends on other packages, i.e., parallel, BSgenome.Hsapiens.UCSC.hg19, and GenomicFeatures. They need to be installed, one may use the commands below, in advance to run ChIASim.  
 ```
@@ -15,6 +18,7 @@ ChIASim depends on other packages, i.e., parallel, BSgenome.Hsapiens.UCSC.hg19, 
   if (!requireNamespace("BSgenome.Hsapiens.UCSC.hg19", quietly = TRUE)) BiocManager::install("BSgenome.Hsapiens.UCSC.hg19")
   if (!requireNamespace("GenomicFeatures", quietly = TRUE)) BiocManager::install("GenomicFeatures")
 ```  
+You may also need to library "BSgenome.Hsapiens.UCSC.hg19" and "GenomicFeatures" first.
 
 # Example
 ```
