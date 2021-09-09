@@ -11,7 +11,7 @@ or
 ```
 devtools::install_github("https://github.com/sl-lin/ChIASim")
 ```
-ChIASim depends on other packages, i.e., parallel, BSgenome.Hsapiens.UCSC.hg19, and GenomicFeatures. They need to be installed, one may use the commands below, in advance to run ChIASim.  
+ChIASim depends on other packages, i.e., parallel, BSgenome.Hsapiens.UCSC.hg19, and GenomicFeatures. They need to be installed, one may use the commands below, in advance to running ChIASim.  
 ```
   if (!requireNamespace("parallel", quietly = TRUE)) install.packages("parallel")
   if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
