@@ -4,10 +4,12 @@
 \title{chiaSim
 }
 \description{
-This function simulates a set of chromatin interactions mediated by a specific protein, which may be views are the in silico counterparts of the output data from ChIA-PET, PLAC-seq or Hi-ChIP.   }
+This function simulates a set of chromatin interactions mediated by a specific protein, which may be viewed as the in silico counterparts of the output data from ChIA-PET, PLAC-seq or Hi-ChIP.   }
 \usage{
 chiaSim(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, 
-	n.cells = 1E5, lp = 0.8, seqlength = 50, N.E=400, N.P=400, N.nE=400, N.nP=400,	REp = "AAGCTT", mc.cores.user = 1, beta = 1, gmclass = 1, outputformat= "base", seed = NULL)
+	n.cells = 1E5, lp = 0.8, seqlength = 50, N.E=400, N.P=400, 
+	N.nE=400, N.nP=400,	REp = "AAGCTT", mc.cores.user = 1, 
+	beta = 1, gmclass = 1, outputformat= "base", seed = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -55,13 +57,9 @@ A simulated ChIA-PET data set in either the "base" or "BEDPE" format.
 }
 \references{
 %% ~put references to the literature/web site here ~
-Mumbach, M., Rubin, A., Flynn, R. et al. HiChIP: efficient and sensitive analysis of protein-directed genome architecture. Nat Methods 13, 919-922 (2016). 
-
 Fudenberg, Geoffrey, and Leonid A Mirny. "Higher-order chromatin structure: bridging physics and biology." Current opinion in genetics & development vol. 22,2 (2012).
 
-Pruitt KD, Brown GR, Hiatt SM, Thibaud-Nissen F, Astashyn A, Ermolaeva O, Farrell CM, Hart J, Landrum MJ, McGarvey KM, Murphy MR, O'Leary NA, Pujar S, Rajput B, Rangwala SH, Riddick LD, Shkeda A, Sun H, Tamez P, Tully RE, Wallin C, Webb D, Weber J, Wu W, DiCuccio M, Kitts P, Maglott DR, Murphy TD, Ostell JM. RefSeq: an update on mammalian reference sequences. Nucleic Acids Res. 2014 Jan;42(Database issue):D756-63. doi: 10.1093/nar/gkt1114. Epub 2013 Nov 19. PMID: 24259432; PMCID: PMC3965018.
-
-Pruitt, K. D., G. R. Brown, S. M. Hiatt, F. Thibaud-Nissen, A. Astashyn, O. Ermolaeva, C. M. Farrell, J. Hart, M. J. Landrum, K. M. McGarvey, M. R. Murphy, N. A. O'Leary, S. Pujar, B. Rajput, S. H. Rangwala, L. D. Riddick, A. Shkeda, H. Sun, P. Tamez, R. E. Tully, C. Wallin, D. Webb, J. Weber, W. Wu, M. DiCuccio, P. Kitts, D. R. Maglott, T. D. Murphy and J. M. Ostell (2014): "Refseq: an update on mammalian reference sequences," Nucleic Acids Res., 42, D756-D763. 
+Pruitt KD, Brown GR, Hiatt SM, Thibaud-Nissen F, Astashyn A, Ermolaeva O, Farrell CM, Hart J, Landrum MJ, McGarvey KM, Murphy MR, O'Leary NA, Pujar S, Rajput B, Rangwala SH, Riddick LD, Shkeda A, Sun H, Tamez P, Tully RE, Wallin C, Webb D, Weber J, Wu W, DiCuccio M, Kitts P, Maglott DR, Murphy TD, Ostell JM. RefSeq: an update on mammalian reference sequences. Nucleic Acids Res. 2014 Jan;42(Database issue):D756-63. doi: 10.1093/nar/gkt1114. 
 
 Fullwood MJ, Wei CL, Liu ET, Ruan Y. Next-generation DNA sequencing of paired-end tags (PET) for transcriptome and genome analyses. Genome Res. 2009;19(4):521-532. doi:10.1101/gr.074906.107
 }
@@ -80,7 +78,8 @@ Fullwood MJ, Wei CL, Liu ET, Ruan Y. Next-generation DNA sequencing of paired-en
 \examples{
 data("POL2")
 data("TSS")
-output.base<- chiaSim(n.cells = 1E3, N.E=100, N.P=100, N.nE=100, N.nP=100, mc.cores.user = 48)
+output.base<- chiaSim(n.cells = 1E3, N.E=100, N.P=100, 
+              N.nE=100, N.nP=100, mc.cores.user = 48)
 head(output.base)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
