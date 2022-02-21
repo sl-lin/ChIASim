@@ -56,17 +56,15 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
   if(is.null(TSSfile)) {
     data("TSS",envir= environment())
     TSS<- TSS
-  }
+  } else{TSS<-TSSfile}
 
   if(TFBSfile=="ERa"){
     data("ERa",envir= environment())
     TFBS<-ERa
-  }
-
-  if(TFBSfile=="POL2"){
+  } else if(TFBSfile=="POL2"){
     data("POL2",envir= environment())
     TFBS<-POL2
-  }
+  } else{ TFBS<-TFBSfile}
 
   colnames(TFBS)[1:3] <- c("chrom","chromStart","chromEnd")
   
