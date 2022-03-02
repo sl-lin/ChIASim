@@ -189,7 +189,8 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
     TFBS.selected[i,1:numSites.TFBS[i]]<-TFBS$midpoint[temp] #23xni to form the selected TFBS matrix
     TFBS.selected.id[i,1:numSites.TFBS[i]]<-temp #Also store their IDs
 
-    temp.F <- sample.int(nrow(temp.seg),numSites.TFBS[i])
+    #temp.F <- sample.int(nrow(temp.seg),numSites.TFBS[i])
+    temp.F <- sample.int(nrow(temp.seg),numSites.nTFBS[i])
 
     temp.TFBS.F <- sapply(temp.F, function(rF){sample.int(temp.seg[rF,1]:temp.seg[rF,2],1)})
     TFBS.selected[i,(numSites.TFBS[i]+1):(numSites.TFBS[i]+numSites.nTFBS[i])]<- temp.TFBS.F
@@ -203,7 +204,8 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
     TSS.selected[i,1:numSites.TSS[i]]<-TSS$TSS[temp]
     TSS.selected.id[i,1:numSites.TSS[i]]<-TSS$gene[temp]
 
-    temp.F <- sample.int(nrow(temp.seg),numSites.TSS[i])
+    #temp.F <- sample.int(nrow(temp.seg),numSites.TSS[i])
+    temp.F <- sample.int(nrow(temp.seg),numSites.nTSS[i])
 
     temp.TSS.F <- sapply(temp.F, function(rF){sample.int(temp.seg[rF,1]:temp.seg[rF,2],1)})
 
