@@ -111,16 +111,17 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
 
   print("Obtain cut loci")
   ###Get cut set of certain Restriction Enzyme, HindIII in this case####
+  if (!is.null(REp) || length(REp)>0){
   hind3 <- DNAString(REp)
   hind3 <- DNAStringSet(hind3)
   names(hind3)<-1:length(hind3)
   seqnames<-seqnames(Hsapiens)[1:23]
   matchHindIII<-function(dict0){
-
+    
     dict<-PDict(dict0)  #The PDict class is a container for storing a preprocessed dictionary
     #of DNA patterns that can later be passed to the matchPDict
     #function for fast matching against a reference sequence (the subject).
-
+    
     list.table<-lapply(seqnames,function(seqname){
       subject<-Hsapiens[[seqname]]
       m<-extractAllMatches(subject, matchPDict(dict, subject))
@@ -130,9 +131,36 @@ chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cell
     colnames(table)<-c("PatternID","chromosome","start","end")
     return(table)
   }
-
+  
   hind3cutset <- matchHindIII(hind3) # Take a couple of mins
+}
 
+else {
+  #Or get cutset using sonication 
+  
+  print("No Restriction Enzyme pattern entered, use sonication")
+  sonicutset <- list()
+  seqnames<-seqnames(Hsapiens)[1:23]
+  for (i in 1: length(chr.length)){
+    num.frag<-rpois(1,chr.length[i]/4000)
+    sonicate.cut <- sample.int(chr.length[i], num.frag)
+    sonicate.cut <- sort(sonicate.cut)
+    sonicutset.temp <- cbind(1,seqnames[i], sonicate.cut, sonicate.cut+1)
+    colnames(sonicutset.temp)<-c("PatternID","chromosome","start","end")
+    sonicutset[[i]] <- as.data.frame(sonicutset.temp)
+    
+  }
+  
+  table<-data.frame(do.call(rbind,sonicutset),stringsAsFactors=FALSE)
+  colnames(table)<-c("PatternID","chromosome","start","end")
+  table$PatternID <- as.integer(table$PatternID)
+  table$chromosome <- as.character(table$chromosome)
+  table$start <- as.integer(table$start)
+  table$end <- as.integer(table$end)
+  
+  hind3cutset <-table
+}
+  
   ###### select interested interaction sites
 
   print("Allocate interaction sites")
