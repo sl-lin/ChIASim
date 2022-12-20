@@ -39,7 +39,7 @@
 #Randomly select sites from a set of TFBS and a set of TSS
 chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cells = 1E3, lp = 0.8,
                     seqlength = 50, N.E = 100, N.P = 100, N.nE = 100, N.nP = 100, REp = "AAGCTT", mc.cores.user = 1,
-                    beta = 1, gmclass = 1, outputformat= "base", seed=2021){
+                    beta = 1, gmclass = 1,  p.pxe=NULL, outputformat= "base", seed=2021){
 
   if (!requireNamespace("parallel", quietly = TRUE)) install.packages("parallel")
 
@@ -290,8 +290,48 @@ else {
   #check length(which(temp.2[,1]!=temp.2[,2]))/length(which(temp.2[,1]==temp.2[,2])) = 0.1111 #inter/#intra = 1/9
   #length(abs(temp.2[which(temp.2[,1]==temp.2[,2]),5]-temp.2[which(temp.2[,1]==temp.2[,2]),6]))
 
-
-  pairing<-rbind(temp.1,temp.2) #chr#1, chr#2, id1, id2, [5]TFBS.pos, [6]TSS.pos  #7311
+if(is.null(p.pxe)){
+  print("pxe is not considered.")
+  pairing<-rbind(temp.1,temp.2) 
+}
+else{
+  z=1
+  temp.31 <- list()
+  temp.32 <- list()
+  for(i in 1:23){
+    for(j in 1:23){
+      temp.31[[z]] <- expand.grid(i,j,1:numSites.TFBS[i],(numSites.TSS[j]+1):(numSites.TSS[j]+numSites.nTSS[j])) #TFBS and Non-specific TSS
+      temp.32[[z]] <- expand.grid(i,j,(numSites.TFBS[i]+1):(numSites.TFBS[i]+numSites.nTFBS[i]),1:numSites.TSS[j]) # Non-specific TFBS and  TSS
+      z=z+1
+    }
+  }
+  temp.31 <- do.call("rbind",temp.31) # sum(numSites.TFBS)*sum(numSites.TFBS) = 40000
+  temp.31[,5]<-sapply(1:nrow(temp.31),function(i){return(TFBS.selected[temp.31[i,1],temp.31[i,3]])}) #1:23, chr, id
+  temp.31[,6]<-sapply(1:nrow(temp.31),function(i){return(TSS.selected[temp.31[i,2],temp.31[i,4]])})
+  
+  temp.size.31 <- round(inter.prop*length(which(temp.31[,1]==temp.31[,2]&abs(temp.31[,5]-temp.31[,6])<=10^7))/(1-inter.prop))
+  inter.31 <- sample(which(temp.31[,1]!=temp.31[,2]), temp.size.31)
+  keep.31 <- c(which(temp.31[,1]==temp.31[,2]&abs(temp.31[,5]-temp.31[,6])<=10^7), inter.2)
+  keep.31 <- sample(keep.31, length(keep.31)) #Mix intra and inter, so that F could have similar proportion of intra/inter
+  temp.31 <- temp.31[keep.31,]
+  colnames(temp.31) <- colnames(temp.1)
+  
+  
+  temp.32 <- do.call("rbind",temp.32) # sum(numSites.TFBS)*sum(numSites.TFBS) = 40000
+  temp.32[,5]<-sapply(1:nrow(temp.32),function(i){return(TFBS.selected[temp.32[i,1],temp.32[i,3]])}) #1:23, chr, id
+  temp.32[,6]<-sapply(1:nrow(temp.32),function(i){return(TSS.selected[temp.32[i,2],temp.32[i,4]])})
+  
+  temp.size.32 <- round(inter.prop*length(which(temp.32[,1]==temp.32[,2]&abs(temp.32[,5]-temp.32[,6])<=10^7))/(1-inter.prop))
+  inter.32 <- sample(which(temp.32[,1]!=temp.32[,2]), temp.size.32)
+  keep.32 <- c(which(temp.32[,1]==temp.32[,2]&abs(temp.32[,5]-temp.32[,6])<=10^7), inter.2)
+  keep.32 <- sample(keep.32, length(keep.32)) #Mix intra and inter, so that F could have similar proportion of intra/inter
+  temp.32 <- temp.32[keep.32,]
+  colnames(temp.32) <- colnames(temp.1)
+  
+  
+  temp.2 <- rbind(temp.2, temp.31, temp.32)
+  pairing<-rbind(temp.1,temp.2) 
+} #chr#1, chr#2, id1, id2, [5]TFBS.pos, [6]TSS.pos  #7311
 
   bisect.temp <- round(nrow(temp.1)/2)
   PT<-rep("TH", bisect.temp)
