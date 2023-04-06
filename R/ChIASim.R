@@ -37,8 +37,8 @@
 ##### set number of samples and other settings
 
 #Randomly select sites from a set of TFBS and a set of TSS
-chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cells = 1E3, lp = 0.8,
-                    seqlength = 50, N.E = 100, N.P = 100, N.nE = 100, N.nP = 100, REp = "AAGCTT", mc.cores.user = 1,
+chiaSim <- function(TFBSfile="ERa", TSSfile=NULL, mean.frag.length = 250, n.cells = 1E6, lp = 0.8,
+                    seqlength = 50, N.E = 1500, N.P = 500, N.nE = 400, N.nP = 400, REp = "AAGCTT", mc.cores.user = 24,
                     beta = 1, gmclass = 1,  p.pxe=NULL, outputformat= "base", seed=2021){
 
   if (!requireNamespace("parallel", quietly = TRUE)) install.packages("parallel")
